@@ -1,5 +1,8 @@
 const express = require('express');
 const cors = require('cors');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 const controller = require('./controller');
 
@@ -9,11 +12,12 @@ app.use(cors());
 app.use(express.json());
 
 
-app.post('/users', controller.register);
-app.get('/users/:id', controller.getUserById);
-app.delete('/users/:id', controller.deleteUser);
+app.post('', controller.register);
+app.get('/:id', controller.getUserById);
+app.delete('/:id', controller.deleteUser);
 
 
-app.listen(3000, () => {
-    console.log(`Server is running on port http://localhost:3000`);
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+    console.log(`Server is running on port http://localhost:${port}`);
 });
