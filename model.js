@@ -1,37 +1,37 @@
 const db = require('./db');
 
 const getUserByUsername = (username) => new Promise((resolve, reject) => {
-    db.get('SELECT * FROM users WHERE username = ?', [username], (err, result) => {
+    db.query('SELECT * FROM users WHERE username = ?', [username], (err, results) => {
         if (err){
             reject(err);
         } else {
-            resolve(result);
+            resolve(results[0]);
         }
     });
 });
 
 const getUserById = (id) => new Promise((resolve, reject) => {
-    db.get('SELECT * FROM users WHERE id = ?', [id], (err, result) => {
+    db.query('SELECT * FROM users WHERE id = ?', [id], (err, results) => {
         if (err){
             reject(err);
         } else {
-            resolve(result);
+            resolve(results[0]);
         }
     });
 });
 
 const insertUser = (data) => new Promise((resolve, reject) => {
-    db.run('INSERT INTO users (username, password, fullname) VALUES (?, ?, ?)', [data.username, data.password, data.fullname], function(err) {
+    db.query('INSERT INTO users (username, password, fullname) VALUES (?, ?, ?)', [data.username, data.password, data.fullname], function(err, results) {
         if (err) {
             reject(err);
         } else {
-            resolve(this.lastID);
+            resolve(results.insertId);
         }
     });
 });
 
 const deleteUser = (id) => new Promise((resolve, reject) => {
-    db.run('DELETE FROM users WHERE id = ?', [id], (err) => {
+    db.query('DELETE FROM users WHERE id = ?', [id], (err) => {
         if (err) {
             reject(err);
         } else {

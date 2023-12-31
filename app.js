@@ -12,7 +12,7 @@ app.use(cors());
 app.use(express.json());
 
 
-app.post('', controller.register);
+app.post('/', controller.register);
 app.get('/:id', controller.getUserById);
 app.delete('/:id', controller.deleteUser);
 
