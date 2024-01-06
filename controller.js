@@ -19,14 +19,14 @@ const register = async (req, res) => {
             message: 'Username already exists',
             data: null,
         });
-    } else {
-        const id = await model.insertUser({ username, password, fullname });
-        return res.status(200).json({
-            status: 'success',
-            message: 'User created successfully',
-            data: { id, username, fullname },
-        });
     }
+
+    const id = await model.insertUser({ username, password, fullname });
+    return res.status(200).json({
+        status: 'success',
+        message: 'User created successfully',
+        data: { id, username, fullname },
+    });
 }
 
 const getUserById = async (req, res) => {
@@ -40,13 +40,13 @@ const getUserById = async (req, res) => {
             message: 'User not found',
             data: null,
         });
-    } else {
-        return res.status(200).json({
-            status: 'success',
-            message: 'User found',
-            data: { id: user.id, username: user.username, fullname: user.fullname },
-        });
     }
+
+    return res.status(200).json({
+        status: 'success',
+        message: 'User found',
+        data: { id: user.id, username: user.username, fullname: user.fullname },
+    });
 }
 
 const deleteUser = async (req, res) => {
@@ -60,14 +60,14 @@ const deleteUser = async (req, res) => {
             message: 'User not found',
             data: null,
         });
-    } else {
-        await model.deleteUser(id);
-        return res.status(200).json({
-            status: 'success',
-            message: 'User deleted successfully',
-            data: null,
-        });
     }
+
+    await model.deleteUser(id);
+    return res.status(200).json({
+        status: 'success',
+        message: 'User deleted successfully',
+        data: null,
+    });
 }
 
 module.exports = {

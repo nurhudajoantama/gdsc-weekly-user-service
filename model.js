@@ -21,7 +21,7 @@ const getUserById = (id) => new Promise((resolve, reject) => {
 });
 
 const insertUser = (data) => new Promise((resolve, reject) => {
-    db.query('INSERT INTO users (username, password, fullname) VALUES (?, ?, ?)', [data.username, data.password, data.fullname], function(err, results) {
+    db.query('INSERT INTO users (username, password, fullname) VALUES (?, ?, ?)', [data.username, data.password, data.fullname], (err, results) => {
         if (err) {
             reject(err);
         } else {
